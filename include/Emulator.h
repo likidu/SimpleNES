@@ -2,12 +2,14 @@
 #define EMULATOR_H
 #include <SFML/Graphics.hpp>
 #include <chrono>
+#include <smk/Color.hpp>
+#include <smk/Window.hpp>
 
 #include "CPU.h"
-#include "PPU.h"
-#include "MainBus.h"
-#include "PictureBus.h"
 #include "Controller.h"
+#include "MainBus.h"
+#include "PPU.h"
+#include "PictureBus.h"
 
 namespace sn
 {
@@ -24,7 +26,8 @@ namespace sn
         void setVideoWidth(int width);
         void setVideoHeight(int height);
         void setVideoScale(float scale);
-        void setKeys(std::vector<sf::Keyboard::Key>& p1, std::vector<sf::Keyboard::Key>& p2);
+        void setKeys(std::vector<sf::Keyboard::Key> &p1, std::vector<sf::Keyboard::Key> &p2);
+
     private:
         void DMA(Byte page);
 
@@ -37,7 +40,9 @@ namespace sn
 
         Controller m_controller1, m_controller2;
 
-        sf::RenderWindow m_window;
+        // FIXME: smk
+        // sf::RenderWindow m_window;
+        smk::Window m_window;
         VirtualScreen m_emulatorScreen;
         float m_screenScale;
 
@@ -46,5 +51,5 @@ namespace sn
         std::chrono::high_resolution_clock::duration m_elapsedTime;
         std::chrono::nanoseconds m_cpuCycleDuration;
     };
-}
+} // namespace sn
 #endif // EMULATOR_H

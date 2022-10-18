@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SimpleNES</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <canvas id="canvas" oncontextmenu="event.preventDefault()">
+      Chargement...
+    </canvas>
+
+    <script>
+      // Alert the user if we have lost the WebGL context.
+      canvas.addEventListener(
+        'webglcontextlost',
+        function (e) {
+          alert('WebGL context lost. You will need to reload the page.')
+          e.preventDefault()
+        },
+        false
+      )
+
+      function onResize() {
+        canvas.width = Math.max(
+          document.documentElement.clientWidth,
+          window.innerWidth || 0
+        )
+        canvas.height = Math.max(
+          document.documentElement.clientHeight,
+          window.innerHeight || 0
+        )
+      }
+      window.addEventListener('resize', onResize, true)
+
+      window.Module = {
+        preRun: [],
+        postRun: [],
+        canvas: canvas,
+        onRuntimeInitialized: function () {
+          // document.querySelector('#loading_page').remove()
+          window.setTimeout(onResize, 0)
+          window.setTimeout(onResize, 100)
+          window.setTimeout(onResize, 1000)
+          window.setTimeout(onResize, 10000)
+        },
+      }
+    </script>
+    <script async src="SimpleNES.js"></script>
+  </body>
+</html>
